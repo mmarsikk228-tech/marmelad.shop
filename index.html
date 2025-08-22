@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мармелад shop</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: #fff8f0;
+      color: #333;
+      text-align: center;
+    }
+
+    header {
+      background: linear-gradient(135deg, #ff7eb3, #ff758c);
+      color: white;
+      padding: 20px;
+      font-size: 1.8em;
+      font-weight: bold;
+    }
+
+    .product {
+      margin: 30px auto;
+      padding: 20px;
+      max-width: 400px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .product:hover {
+      transform: scale(1.03);
+    }
+
+    .product img {
+      max-width: 100%;
+      border-radius: 15px;
+    }
+
+    .price {
+      font-size: 1.3em;
+      margin: 10px 0;
+      color: #ff5e78;
+    }
+
+    button {
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      border: none;
+      padding: 12px 20px;
+      border-radius: 30px;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    /* Модальне вікно */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+      background: white;
+      margin: 15% auto;
+      padding: 20px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 400px;
+      text-align: left;
+    }
+
+    .close {
+      float: right;
+      font-size: 1.5em;
+      cursor: pointer;
+    }
+
+    .socials {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #ff758c;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .socials a {
+      color: white;
+      font-size: 1.5em;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<header>🍬 Магазин Мармеладу</header>
+
+<!-- Кислий набір -->
+<div class="product">
+  <img src="https://i.imgur.com/IvPuYX6.jpg" alt="Кислий мармелад">
+  <h2>Кислий набір</h2>
+  <p>Яскравий та освіжаючий смак</p>
+  <p class="price">50 грн / 100 г</p>
+  <button onclick="openModal('Кислий набір')">Купити</button>
+</div>
+
+<!-- Солодкий набір -->
+<div class="product">
+  <img src="https://i.imgur.com/0rX4cih.jpg" alt="Солодкий мармелад">
+  <h2>Солодкий набір</h2>
+  <p>Ніжний солодкий смак</p>
+  <p class="price">50 грн / 100 г</p>
+  <button onclick="openModal('Солодкий набір')">Купити</button>
+</div>
+
+<!-- Модальне вікно -->
+<div id="buyModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2 id="productTitle">Оплата</h2>
+    <p><b>Номер картки:</b> 4441 1144 3688 5998</p>
+    <p>Після оплати напишіть мені в 
+      <a href="https://t.me/+380960263802" target="_blank">Telegram</a> або 
+      <a href="viber://chat?number=%2B380960263802">Viber</a>.
+    </p>
+    
+    <h3>Виберіть доставку:</h3>
+    <label><input type="radio" name="delivery" value="Нова пошта"> Нова пошта</label><br>
+    <label><input type="radio" name="delivery" value="Укр пошта"> Укр пошта</label>
+    
+    <br><br>
+    <button onclick="finishOrder()">Підтвердити</button>
+  </div>
+</div>
+
+<!-- Соц мережі -->
+<div class="socials">
+  <a href="https://t.me/+380960263802">Telegram</a>
+  <a href="viber://chat?number=%2B380960263802">Viber</a>
+  <a href="mailto:arsikand432@gmail.com">Email</a>
+</div>
+
+<script>
+  let selectedProduct = "";
+
+  function openModal(product) {
+    selectedProduct = product;
+    document.getElementById("productTitle").innerText = product + " - оплата";
+    document.getElementById("buyModal").style.display = "block";
+  }
+
+  function closeModal() {
+    document.getElementById("buyModal").style.display = "none";
+  }
+
+  function finishOrder() {
+    let delivery = document.querySelector('input[name="delivery"]:checked');
+    if (delivery) {
+      alert("Ви замовили: " + selectedProduct + "\nДоставка: " + delivery.value + "\nПісля оплати напишіть у Telegram або Viber 📲");
+      closeModal();
+    } else {
+      alert("Будь ласка, виберіть спосіб доставки 🚚");
+    }
+  }
+</script>
+
+</body>
+</html>
